@@ -1,0 +1,77 @@
+#header{background: #006659!important;}
+body{
+    /*background: url(../img/arbolmano.jpg)  no-repeat center center fixed !important;*/
+
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+
+}
+#nav-menu-container a:hover{
+    color: #ffff1a !important;
+}
+.menu-active a{
+    color:#ffff1a!important;
+}
+.panel-title{
+    color: #00a995;
+    text-align: center;
+    font-family: Tahoma;
+}
+.panel-heading{
+    background: rgba(255, 255, 26, 0.34) !important; ;
+}
+#inicio{
+    background: rgba(255, 255, 26, 0.34) !important; ;
+    color:#066a04;
+    border-radius: 1em;
+}
+.boton{
+    background-color: #006659;
+    border-color: #ffffff;
+    color: #ffffff;
+    border-radius: 0.5em;
+    height: 30px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    /*padding: 16px 22px;*/
+}
+.boton2{
+    background-color: gray;
+    border-color: #ffffff;
+    color: #ffffff;
+    border-radius: 0.5em;
+    height: 30px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    /*padding: 16px 22px;*/
+}
+
+.boton:hover {
+    /*background-color: #008CBA;*/
+    color: yellow;
+    opacity: 1;
+}
+
+body .modal {
+    width: 100%; /* desired relative width */
+    left: 5%; /* (100%-width)/2 */ /* place center */
+    margin-left:auto; margin-right:auto; }
+
+.modal-wide .modal-dialog {
+    width: 80%; /* or whatever you wish */ }
+
+.modal.large {
+    width: 80%; }
+
+
+
+
+/*.modal-dialog modal-dialog-centered modal-lg {*/
+    /*width: 80% !important;*/
+/*}*/

@@ -61,10 +61,6 @@ class EditPrograma extends Controller
             $programa->presupuesto_prog = $request->presupuestoP;
             $programa->id_ano = $request->anno;
 
-
-
-
-
             $programa->save();
 
 

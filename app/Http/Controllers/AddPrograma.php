@@ -52,10 +52,12 @@ class AddPrograma extends Controller
 
         $coop = $request->idcoop;
 
-
-       $prog = Programa::create(['nomb_prog'=>$nombre,'objetivo'=>$objetivo,'metodologia'=>$metodologia,
-            'presupuesto_prog'=>$presupuesto,'id_ano'=>$anno,'id_cooperativa'=>$coop]);
-
+        try {
+            $prog = Programa::create(['nomb_prog' => $nombre, 'objetivo' => $objetivo, 'metodologia' => $metodologia,
+                'presupuesto_prog' => $presupuesto, 'id_ano' => $anno, 'id_cooperativa' => $coop]);
+        }catch (\Exception $exception){
+            throw $exception;
+        }
 
         $idProg =$prog->id;
 

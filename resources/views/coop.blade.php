@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-
-
 @section('content')
 
 
@@ -143,7 +141,7 @@
                                     <div class="col-sm-5">
                                        {{-- <input type="number" min="0" max="10" id="2" value="0" class="form-control">--}}
                                         <select id="2" class="form-control">
-                                            @for($a=1;$a<=15;$a++)
+                                            @for($a=0;$a<=15;$a++)
                                                 <option value="{{$a}}">{{$a}}</option>
                                             @endfor
                                         </select>
@@ -178,7 +176,7 @@
                                 <div class=" form-group row">
                                     <label for="4" class="col-sm-6 col-form-label">Otros ingresos</label>
                                     <div class="col-sm-5">
-                                        <input type="number" min="0" id="4" value="0" name="otrosI" class="form-control @if($errors->has('otrosing')) border-danger @endif">
+                                        <input type="number" min="0" id="4" value="0" name="otrosI" step="any" class="form-control @if($errors->has('otrosing')) border-danger @endif">
                                         <div id="otrosI" class="form-control-feedback text-danger" ></div>
                                     </div>
 
@@ -186,7 +184,7 @@
                                 <div class=" form-group row">
                                     <label for="4" class="col-sm-6 col-form-label">Presupuesto total</label>
                                     <div class="col-sm-5">
-                                        <input type="number"  id="total_presup" readonly >
+                                        <input type="number"  id="total_presup" class="form-control" readonly >
 
                                     </div>
 
@@ -285,7 +283,7 @@
                                     <div class="col-sm-5">
                                         {{-- <input type="number" min="0" max="10" id="2" value="0" class="form-control">--}}
                                         <select id="edit2" class="form-control">
-                                            @for($a=1;$a<=15;$a++)
+                                            @for($a=0;$a<=15;$a++)
                                                 <option value="{{$a}}">{{$a}}</option>
                                             @endfor
                                         </select>
@@ -528,6 +526,9 @@
             $('#2').click(function () {
                 var porciento=$('#2').val();
                 var utiledades=$('#1').val();
+               /* //var aux = Math.round10();
+                var aux =Math.round10(parseFloat(porciento*utiledades/100),-1); 
+                alert('paso');   */
                 $('#3').val(porciento*utiledades/100);
 
                 $('#total_presup').val(parseFloat($('#3').val()) +parseFloat($('#4').val()) +parseFloat($('#5').val()) +parseFloat($('#6').val()));
@@ -541,8 +542,6 @@
                 $('#edit3').val(porciento*utiledades/100);
 
                 $('#total_pre').val(parseFloat($('#edit3').val()) +parseFloat($('#edit4').val()) +parseFloat($('#edit5').val()) +parseFloat($('#edit6').val()));
-
-
 
             });
 
@@ -579,38 +578,6 @@
                         var ano = data.ano.ano;
 
                         location.reload();
-
-
-
-                    /*    tablaDT.destroy();
-                        tabla.append('<tr id="item_' + id_ano + '">' +
-
-                            ' <td id="id_' + ano + '" >' + ano + '</td>' +
-                            ' <td >' +
-                            '<button onclick="editar(' + id_ano + ')" class="boton btn"><i class="fa fa-edit"></i>  Editar</button> ' +
-
-
-
-
-                            '<button onclick="eliminar(' + id_ano + ',' + ano + ')" class="boton btn"><i class="fa fa-eraser"></i>  Eliminar</button>' +
-
-
-
-
-                            '<button onclick="info(' + data.ano + ',' + ano + ')" class="boton btn"><i class="fa fa-info"></i>  Información</button>' +
-                            '</td>' +
-                            //                          drop +
-                            '</tr>');
-
-                        tablaDT = tabla.DataTable();
-                        var defaultColor = $('#item_'+id_ano).css('color');
-                        $('#item_'+id_ano)
-                        .css('opacity', '0.20').css('color', 'green').animate({opacity: 1}, 500).animate({opacity: 0.20}, 500).animate({opacity: 1}, 500)
-                        .animate({opacity: 0.20}, 500).animate({opacity: 1}, 500, function () {
-                            $('#item_'+id_ano).css('color', defaultColor);
-                    });
-//
-*/
                     },
                     error: function (jqXHR ) {
 
@@ -635,13 +602,6 @@
 
 
                             }
-
-
-
-
-
-
-
 
                         }
 
@@ -682,7 +642,7 @@
 
 
                     }, error: function () {
-                        alert('error')
+                        alert('Ha ocurrido un error al cargar los datos. Contacte con el administrador del sistema.')
                     }
                 });
 

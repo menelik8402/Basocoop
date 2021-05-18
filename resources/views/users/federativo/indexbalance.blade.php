@@ -4,18 +4,26 @@
         <section class="tabla">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    @if($ind=='ind')
-                        <input type="hidden" value="ind" name="ind" >
+                @if($ind=='ind')
+                        
                         <h1 class="panel-title">Balance Social Cooperativo con variables</h1>
                     @else
-                        <input type="hidden" value="no" name="ind" >
+                       
                         <h1 class="panel-title">Balance Social Cooperativo</h1>
                     @endif
+                  
 
                 </div>
                 <div class="panel-body">
                     <form action="/generar/balance/fed" method="get">
-
+                    @if($ind=='ind')
+                        <input type="hidden" value="ind" name="ind" >
+                       
+                    @else
+                        <input type="hidden" value="no" name="ind" >
+                        
+                    @endif
+                  
                            <div class="form-inline ">
                         <label  class=" pull-left">Cooperativa :</label>
                         <div CLASS=" @if($errors->has('coop')) border-danger @endif">

@@ -4,9 +4,9 @@
     <div class="container">
         <a  class="btn-success pull-right" href="{{ route('balance.pdf',['id'=>$ano->id,'id_coop'=>$nomb_coop->id,'ind'=>$indicadores]) }}"> Descargar PDF</a>
         <br>
-
+        @if($indicadores=='ind')
         <div >
-            <div class="panel-heading">
+          <div class="panel-heading">
                 <h1 class="panel-title">Premisas</h1>
             </div>
 
@@ -64,7 +64,7 @@
 
             <br>
 
-                        @if($indicadores=='ind')
+                        
                         <div class="panel-heading">
                             <h1 class="panel-title">Variables</h1>
                         </div>
@@ -2260,14 +2260,15 @@
 
                 @else
                 <table class="table  table-bordered table-sm  table-hover tabla">
-            <thead>
+            <thead class="thead-light">
                 <th class="col-sm-1">No.</th>
                 <th class="col-sm-2">Programas de desarrollo social</th>
-                <th class="col-sm-2">Presupuesto</th>
+                <th class="col-sm-2">Presupuesto aprobado</th>
                 {{--<th class="col-sm-2">Unidades Físicas</th>--}}
                 {{--<th class="col-sm-2">Manifestación Numérica</th>--}}
                 <th class="col-sm-2">Unidades Físicas Planificadas</th>
                 <th class="col-sm-2">Número de Beneficiarios Planificados</th>
+                <th class="col-sm-2">Presup Real</th>
                 <th class="col-sm-2">Unidades Fisicas Reales</th>
                 <th class="col-sm-2">Número de Beneficiarios Reales</th>
                 <th class="col-sm-2">% Cumplimiento UF</th>
@@ -2295,8 +2296,10 @@
                       <?php
                         $sum_und_fis_real=$met->GetSeguimientos->sum('unid_fisicas_real')+$sum_und_fis_real;
                         $sum_num_ben_real=$met->GetSeguimientos->sum('num_beneficiarios_real')+$sum_num_ben_real;
+                        $presup_real=$met->GetSeguimientos->sum('presup_real');
                         ?>
                     @endforeach
+                    <td>{{$presup_real}}</td>
                     <td>{{$sum_und_fis_real}}</td>
                     <td>{{$sum_num_ben_real}}</td>
                     <?php

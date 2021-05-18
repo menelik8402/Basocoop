@@ -94,6 +94,7 @@
         <div class="container">
 
             <br>
+            @if($indicadores=='ind')
             <div >
 
                     <h1 class="panel-title">Premisas</h1>
@@ -153,7 +154,7 @@
 
                 <br>
 
-                @if($indicadores=='ind')
+               
                     <div class="panel-heading">
                         <h1 class="panel-title">Variables</h1>
                     </div>

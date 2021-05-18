@@ -8,7 +8,7 @@
         <section class="tabla">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h1 class="panel-title"> Actividades del programa {{$proy->nomb_prog}}</h1>
+                    <h1 class="panel-title"> Actividades del Programa:  "<strong>{{$proy->nomb_prog}}</strong>"</h1>
                 </div>
                 <div class="panel-body">
                     <table class="table  table-bordered" id="tabla">

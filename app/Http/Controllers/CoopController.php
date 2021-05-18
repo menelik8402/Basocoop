@@ -248,7 +248,7 @@ class CoopController extends Controller
                     $preaux += $prg->presupuesto_prog;
                 }
                 ////
-                $presup = $presup_total - $preaux;
+                $presup = round($presup_total - $preaux,2);
             }catch (\Exception $exception){
                 throw $exception;
             }

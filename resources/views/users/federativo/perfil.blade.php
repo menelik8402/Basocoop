@@ -73,7 +73,7 @@ Header Section
                         <li><a href="/federacion/gestdemo">Gestión democrática</a></li>
                         <li><a href="/federacion/partecon">Participación económica</a></li>
                         <li><a href="/federacion/autoind">Autonomía e independencia</a></li>
-                        <li><a href="/federacion/educforminf">Educación formación e información </a></li>
+                        <li><a href="/federacion/educforminf">Educación, formación e información </a></li>
                         <li><a href="/federacion/coopcoop">Cooperación entre cooperativas</a></li>
                         <li><a href="/federacion/intcoop">Interés por la cooperativa</a></li>
 
@@ -82,9 +82,10 @@ Header Section
                 </li>
                 <li class="menu-has-children"><a href="#">Reportes</a>
                     <ul>
-                        <li><a href="/fed/report/total">Reporte por actividades general</a></li>
+                    <li><a href="/main">Reporte de Cooperativas</a></li>
+                    <li><a href="/fed/report/total">Reporte por actividades general</a></li>
 
-                        <li><a href="/federacion/reporte">Reporte de seguimientos por actividades</a></li>
+                    <li><a href="/federacion/reporte">Reporte de seguimientos por actividades</a></li>
 
 
                     </ul>

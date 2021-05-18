@@ -8,6 +8,9 @@
             </div>
             <div class="panel-body">
                 <form action="/balance/federativo/total" method="get">
+                <input type="hidden" name="coop" value="cooperativa" >
+                <input type="hidden" name="ind"  value="1552" >
+                                   
 
                     <div class="form-inline justify-content-center ">
 

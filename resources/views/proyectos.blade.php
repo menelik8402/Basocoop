@@ -6,7 +6,10 @@
         <section class="tabla">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h1 class="panel-title">Programa</h1>
+                    <h1 class="panel-title">Programas de Desarrollo Social</h1>
+                    <div class="alert alert-info" id="alerta1" style="display: none" role="alert">
+                    
+                    </div>
                 </div>
                 <div class="panel-body">
                     <table class="table  table-bordered" id="tabla">
@@ -403,6 +406,52 @@
             {{--})--}}
 
 
+
+            var fecha=new Date();
+
+         
+       
+
+                    $.ajax({
+                                type: 'GET',
+                                url: '/DispPresup/' + {!! $ano !!}[0].id + '/' + {!! $proy !!}[0].id_cooperativa,
+                                data: {
+                                    _token: '{{ csrf_token() }}',
+
+                                },
+
+                                success: function (data) {
+                                    var presup = data.presup;
+                                     if({!! $ano !!}[0].ano==fecha.getFullYear() ){
+                                            if(presup>0){
+                                                
+                                               //alert("Usted posee un presupuesto que asciende a "+presup +" que pertenece al año "+fecha.getFullYear());
+                                                        $('#alerta1').text('Usted posee un presupuesto que asciende a '+presup +' que pertenece al año '+fecha.getFullYear());
+                                                        $('#alerta1').fadeIn(1000);
+                                            }
+                                            else
+                                            {
+                                                $('#alerta1').text("Usted ha consumido todo el presupuesto para el año "+ fecha.getFullYear());
+                                                $('#alerta1').fadeIn(1000);
+                                            }
+                                     }
+                                     else
+                                     {
+                                               $('#alerta1').text("Usted no tiene presupuesto asignado para el año actual");
+                                                $('#alerta1').fadeIn(1000);
+                                     }    
+
+
+                                }, error: function () {
+                                    alert('Error intentando buscar el presupuesto actual');
+                                }
+                            });
+
+
+
         });
+       
+   
+
     </script>
 @endsection

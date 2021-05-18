@@ -164,11 +164,11 @@ class FedController extends Controller
                 $coleccion->push($ano->ano);
 
         }
-       // dd($annos_real);
+       
 
         return view('users.federativo.balanceaAnual',[
 
-            'annos' => $annos_real
+            'annos' => $annos_real->sortByDesc('ano')
         ]);
     }
 

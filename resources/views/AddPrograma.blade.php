@@ -86,6 +86,7 @@
 
                var idano=$("#ano").val();
                var idcoop=$('#idcoop').val();
+               //alert('/DispPresup/' + idano + '/'+idcoop);
 
                if(idano!=0) {
 

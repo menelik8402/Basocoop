@@ -25,7 +25,7 @@ class Create_Metas_Request extends FormRequest
     {
         return [
             'descUnidadesFisicas' =>'required',
-            'presupuesto' => 'required|min:1|numeric',
+            'presupuesto' => 'required|min:0|numeric',
             'responsable'=> 'required',
             'planUF'=>'required|min:1|numeric',
             'beneficiosPlan'=>'required|min:1|numeric'

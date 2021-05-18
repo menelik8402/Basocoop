@@ -6,7 +6,7 @@
         <section class="tabla">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h1 class="panel-title">Distribución de Actividades por Programas</h1>
+                    <h1 class="panel-title">Actividades por programas</h1>
                 </div>
                 <div class="alert alert-success" id="alerta" style="display: none" role="alert">
                     Se añadió correctamente el seguimiento.
@@ -52,14 +52,14 @@
                                                              {{$met->desc_unid_fisicas }}
                                                             </td>
                                                             <td>
-                                                                <a href="#" onclick="añadir({{$p->id}},{{$met->id}})" >  Planificar </a>
+                                                                <a href="#" onclick="añadir({{$p->id}},{{$met->id}},{{$p->Ano->ano}})" >  Planificar </a>
                                                             </td>
                                                             <td>
-                                                                <a href="#" onclick="añadir1({{$p->id}},{{$met->id}})" >  Real </a>
+                                                                <a href="#" onclick="añadir1({{$p->id}},{{$met->id}},{{$p->Ano->ano}})" >  Real </a>
                                                             </td>
 
                                                        </tr>
-
+                                                     
                                                     @endforeach
                                                </table>
 
@@ -114,7 +114,7 @@
                                 {{--<th>Presup Cons </th>--}}
 
                                 <th>Descripción </th>
-                                <th>Pre plan</th>
+                                <th>Pre aprob</th>
                                 <th>UFP </th>
                                 <th>UFP restantes</th>
                                 <th>NBP</th>
@@ -137,7 +137,7 @@
 
 
                         </table>
-                    <button id="AddMemb" type="button" class="btn boton pull-right" >Guardar</button>
+                    <button id="AddMemb" type="button"  class="btn boton pull-right" >Guardar</button>
                     <button id="ELIMMemb" type="button" data-dismiss="modal"  class="btn boton pull-left" >Eliminar ultimo Seg</button>
                 </div>
 
@@ -159,7 +159,7 @@
                  <small>Descrip => Descripción,Presup: Presupuesto, UFP:Unidades Físicas Planificadas,NBP:Número de Beneficiarios Planificados,UFR:Unidades Físicas Reales,NBR:Número de Beneficiarios Reales  </small>
                 </div>
                 <div class="row  mx-2">
-                    <small>% SUF : Porciento de satisfación de Unidades Fisícas,% SUF : Porciento de satisfación Número de Beneficiarios,Fecha: Fecha de realizacion del seguimiento  </small>
+                    <small>% SUF : Porciento de satisfación de Unidades Fisícas,% SNB : Porciento de satisfación Número de Beneficiarios,Fecha: Fecha de realizacion del seguimiento  </small>
                 </div>
             </div>
         </div>
@@ -197,11 +197,11 @@
                         {{--<th>Presup Cons </th>--}}
 
                         <th>Descrip </th>
-                        <th>Pre plan</th>
+                        <th>Pre aprob</th>
                         <th>UFP </th>
                         <th>NBP</th>
                         <th>Fecha plan</th>
-                        <th>Pre real</th>
+                        <th>Pre ejec</th>
                         <th>UFR </th>
                         <th>NBR </th>
                         <th>% SUF </th>
@@ -244,7 +244,7 @@
                     <small>Descrip => Descripción,Presup: Presupuesto, UFP:Unidades Físicas Planificadas,NBP:Número de Beneficiarios Planificados,UFR:Unidades Físicas Reales,NBR:Número de Beneficiarios Reales  </small>
                 </div>
                 <div class="row  mx-2">
-                    <small>% SUF : Porciento de satisfación de Unidades Fisícas,% SUF : Porciento de satisfación Número de Beneficiarios,Fecha: Fecha de realizacion del seguimiento  </small>
+                    <small>% SUF : Porciento de satisfación de Unidades Fisícas,% SNB : Porciento de satisfación Número de Beneficiarios,Fecha: Fecha de realizacion del seguimiento  </small>
                 </div>
             </div>
         </div>
@@ -277,7 +277,8 @@
            // tablaDT = tabla.DataTable();
 
            //
-            añadir= function (idpro,idmet) {
+            añadir= function (idpro,idmet,idano) {
+               
 
                 idmeta=idmet;
 
@@ -348,14 +349,13 @@
                             {
                                 ult_fecha_seg=data.seg_met[k].fecha_seguimiento;
                                 //alert(ult_fecha_seg)
-
-
-
                             }
                             //
                         }
-                       /* value="'+ufp_met+'"*/
-
+                        
+                     
+                      if(ufp_met>=0 && nbf_met>0){   
+                           
                         tabla.append(
 
                             '<tr id="elim" name="elim" >'+
@@ -363,26 +363,20 @@
                             ' <td class="col-sm-2" > '+ ' <input type="number" id="pcon"  min="0" value="0"  class="form-control " required>' +'</td>'+
                             ' <td class="col-sm-2" > '+ ' <input type="number" id="ufp_fijo"  min="0"  value=1 readonly  max="'+ufp_met+'" class="form-control " required>' +'</td>'+
                             ' <td class="col-sm-2" > '+ ' <input type="number" id="ufp"  min="0"  value="'+ufp_met+'" readonly  max="'+ufp_met+'" class="form-control " required>' +'</td>'+
-                            ' <td class="col-sm-2" > '+ ' <input type="number" id="nbp"  min="0"   value="'+nbf_met+'" max="'+nbf_met+'"  class="form-control " required>' +'</td>'+
-                            ' <td  > '+ ' <input type="date" id="fechaseg" min="0"  class="form-control "   required>' +'</td>'+
-//                            ' <td class="col-sm-1" > '+ ' <input type="number" id="preal"  min="0" value="0"  class="form-control " required>' +'</td>'+
-//                            ' <td class="col-sm-1" > '+ ' <input type="number" id="ufr" min="0" class="form-control" value="0" required>' +'</td>'+
-//                            ' <td class="col-sm-1" > '+ ' <input type="number" id="nbr" min="0" class="form-control" value="0" required>' +'</td>'+
-//                            ' <td class="col-sm-1" > '+ ' <input type="text" id="psuf" readonly min="0"  value="0" class="form-control" required>' +'</td>'+
-//                            ' <td class="col-sm-1" > '+ ' <input type="text" id="psnb" readonly min="0" value="0" class="form-control" required>' +'</td>'+
-//                            ' <td  > '+ ' <input type="date" id="fechareal" min="0"  class="form-control "   required>' +'</td>'+
-
-
+                            ' <td class="col-sm-2" > '+ ' <input type="number" id="nbp"  min="1"   value="'+nbf_met+'" max="'+nbf_met+'"  class="form-control " required>' +'</td>'+
+                            ' <td  > '+ ' <input type="date" id="fechaseg" min="'+idano+'-01-01" max="'+idano+'-12-31"  class="form-control "   required>' +'</td>'+
                             ' </tr>'
 
 
                         )
+                      }
+                      
                         presup_total=parseInt(data.meta.presupuesto)-presup_total;
 
                         if(presup_total<0)
                             presup_total=0;
 
-
+                    
                         $('#pcon').attr('max',presup_total);
                         $('#pcon').val(presup_total);
 
@@ -404,8 +398,8 @@
 
 
 
-            añadir1= function (idpro,idmet,gg) {
-
+            añadir1= function (idpro,idmet,idano) {
+                
                 idmeta=idmet;
                 ult_fecha_seg=$('#fechaseg').val();
 
@@ -452,7 +446,7 @@
                                     ' <td class="col-sm-1"  > ' + '<input type="number" class="form-control" id="num_beneficiarios_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].num_beneficiarios_real + '"  >' + '</td>' + /* max="'+data.seg_met[k].num_benef_planif+'"*/
                                     ' <td class="col-sm-1"  > ' + '<input type="text" class="form-control"  readonly value="' + Math.round(parseInt(data.seg_met[k].unid_fisicas_real) * 100 / parseInt(data.seg_met[k].unid_fisicas_planif)) + '">' + '</td>' +
                                     ' <td class="col-sm-1"  > ' + '<input type="text" class="form-control" readonly value="' + Math.round(parseInt(data.seg_met[k].num_beneficiarios_real) * 100 / parseInt(data.seg_met[k].num_benef_planif)) + '">' + '</td>' +
-                                    ' <td class="col-sm-2"  > ' + '<input type="date" class="form-control" id="fecha_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].fecha_real + '" >' + '</td>' +
+                                    ' <td class="col-sm-2"  > ' + '<input type="date" class="form-control" min="'+idano+'-01-01"  max="'+idano+'-12-31"  id="fecha_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].fecha_real + '" >' + '</td>' +
 
 
                                     ' </tr>'
@@ -473,7 +467,7 @@
                                     ' <td class="col-sm-1"  > ' + '<input type="number" class="form-control" readonly id="num_beneficiarios_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].num_beneficiarios_real + '"  >' + '</td>' + /* max="'+data.seg_met[k].num_benef_planif+'"*/
                                     ' <td class="col-sm-1"  > ' + '<input type="text" class="form-control"  readonly value="' + Math.round(parseInt(data.seg_met[k].unid_fisicas_real) * 100 / parseInt(data.seg_met[k].unid_fisicas_planif)) + '">' + '</td>' +
                                     ' <td class="col-sm-1"  > ' + '<input type="text" class="form-control" readonly value="' + Math.round(parseInt(data.seg_met[k].num_beneficiarios_real) * 100 / parseInt(data.seg_met[k].num_benef_planif)) + '">' + '</td>' +
-                                    ' <td class="col-sm-2"  > ' + '<input type="date" class="form-control" readonly id="fecha_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].fecha_real + '" >' + '</td>' +
+                                    ' <td class="col-sm-2"  > ' + '<input type="date" class="form-control" readonly  min="'+idano+'-01-01"  max="'+idano+'-12-31"  id="fecha_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].fecha_real + '" >' + '</td>' +
 
 
                                     ' </tr>'
@@ -518,7 +512,7 @@
                     if($('#descrip').val()!=' ') {
                         if (Date.parse(ult_fecha_seg) <= Date.parse($('#fechaseg').val())) {
 
-                            if (presup_total > 0 && parseInt($('#pcon').val()) > 0) {
+                            if (presup_total >= 0 && parseInt($('#pcon').val()) >= 0) {
 
 
                                 var descripcion = $('#descrip').val();
@@ -526,23 +520,11 @@
                                 var unid_fisicas_planif = $('#ufp_fijo').val();
                                 var num_benef_planif = $('#nbp').val();
                                 var fecha_seguimiento = $('#fechaseg').val();
-
-                                //                          var unid_fisicas_real = $('#ufr').val();
-                                //                          var num_beneficiarios_real = $('#nbr').val();
-                                //
-                                //                          var fecha_real=$('#fechareal').val();
-                                //                          var presup_real=$('#preal');
-
                                 var unid_fisicas_real = 0;
                                 var num_beneficiarios_real = 0;
-
                                 var fecha_real ={!! date('Ymd') !!};
-
                                 var presup_real = 0;
-
-
                                 var id_meta = idmeta;
-
 
                                 if (presup_total < parseInt($('#pcon').val())) {
                                     alert('El presupuesto para el seguimiento excede a el presupuesto para la meta,el seguimiento no se insertara')
@@ -636,8 +618,9 @@
                                                     $('#ufp').attr('max', ufp_metp);
                                                     $('#ufp').val(ufp_metp);
                                                     $('#nbp').attr('max', nbf_metp);
-                                                    $('#nbp').val(nbf_metp);
+                                                    $('#nbp').val();
 
+                                                   
                                                     // $('h5').val('seguimos en com');
 
 
@@ -664,13 +647,7 @@
                                                 ' <td class="col-sm-2" > ' + ' <input type="number" id="ufp"  min="0" readonly value="' + ufp_metp + '"  max="' + ufp_metp + '" class="form-control " required>' + '</td>' +
                                                 ' <td class="col-sm-2" > ' + ' <input type="number" id="nbp"  min="0"   value="' + nbf_metp + '" max="' + nbf_metp + '"  class="form-control " required>' + '</td>' +
                                                 ' <td  > ' + ' <input type="date" id="fechaseg" min="0"  class="form-control "   required>' + '</td>' +
-                                                //                            ' <td class="col-sm-1" > '+ ' <input type="number" id="preal"  min="0" value="0"  class="form-control " required>' +'</td>'+
-                                                //                            ' <td class="col-sm-1" > '+ ' <input type="number" id="ufr" min="0" class="form-control" value="0" required>' +'</td>'+
-                                                //                            ' <td class="col-sm-1" > '+ ' <input type="number" id="nbr" min="0" class="form-control" value="0" required>' +'</td>'+
-                                                //                            ' <td class="col-sm-1" > '+ ' <input type="text" id="psuf" readonly min="0"  value="0" class="form-control" required>' +'</td>'+
-                                                //                            ' <td class="col-sm-1" > '+ ' <input type="text" id="psnb" readonly min="0" value="0" class="form-control" required>' +'</td>'+
-                                                //                            ' <td  > '+ ' <input type="date" id="fechareal" min="0"  class="form-control "   required>' +'</td>'+
-
+                                              
 
                                                 ' </tr>'
                                             )
@@ -695,7 +672,7 @@
                             }
                         }
                         else {
-                            alert('La fecha del seguimiento desea insertar es menor que la fecha del ultimo seguimiento');
+                            alert('La fecha del seguimiento desea insertar es menor que la fecha del ultimo seguimiento o el número de beneficiarios que desea insertar es menor o igual cero ');
                             // location.reload();
                         }
                     }
@@ -764,14 +741,6 @@
                                 data: {
                                     _token: '{{ csrf_token() }}',
 
-
-//                            descripcion: descripcion,
-//                            presup_con: presup_con,
-//                            unid_fisicas_planif: unid_fisicas_planif,
-//                            num_benef_planif: num_benef_planif,
-//                            fecha_seguimiento: fecha_seguimiento,
-
-
                                     unid_fisicas_real: unid_fisicas_real,
                                     num_beneficiarios_real: num_beneficiarios_real,
                                     fecha_real : fecha_real,
@@ -783,13 +752,7 @@
                                 },
 
                                 success: function (data) {
-                                    //location.reload();
-                                    //se inserto correctamente el seguimiento
-//                              $('#alerta').fadeIn(1000);
-//                              $('#alerta').fadeOut(5000);
-
-                                    //
-
+                    
                                 }, error: function (e) {
                                     alert('Error al insertar el seguimiento en la base de datos');
                                     //location.reload();
@@ -799,16 +762,13 @@
 
 
                         }
-                                             $('#modalMemb1').modal('hide');   //kkkkkkkkkkkkkkkkk  location.reload();
+                                             $('#modalMemb1').modal('hide');   
 
                       }
                       else
                       {
                           alert('Datos Incorrectos.!!Revise!!')
                       }
-
-
-
 
 
                   $('#modalMemb1').modal('hide')

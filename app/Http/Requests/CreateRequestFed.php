@@ -26,6 +26,7 @@ class CreateRequestFed extends FormRequest
         return [
             'coop' => 'required|not_in:0',
             'ano' => 'required|not_in:0',
+            'ind' =>  'not_in:0',
         ];
     }
 

@@ -72,7 +72,7 @@ Header Section
                             <li><a href="/federacion/gestdemo">Gestión vemocrática</a></li>
                             <li><a href="/federacion/partecon">Participación económica</a></li>
                             <li><a href="/federacion/autoind">Autonomía e independencia</a></li>
-                            <li><a href="/federacion/educforminf">Educación formación e información </a></li>
+                            <li><a href="/federacion/educforminf">Educación, formación e información </a></li>
                             <li><a href="/federacion/coopcoop">Cooperación entre cooperativas</a></li>
                             <li><a href="/federacion/intcoop">Interés por la cooperativa</a></li>
 
@@ -119,7 +119,7 @@ Header Section
                             <li><a href="/VarII">Gestión democrática</a></li>
                             <li><a href="/VarIII">Participación económica</a></li>
                             <li><a href="/VarIV">Autonomía e independencia</a></li>
-                            <li><a href="/VarV">Educación formación e información </a></li>
+                            <li><a href="/VarV">Educación ,formación e información </a></li>
                             <li><a href="/VarVI">Cooperación entre cooperativas</a></li>
                             <li><a href="/VarVII">Interés por la cooperativa</a></li>
 
@@ -140,16 +140,17 @@ Header Section
                         <ul>
                             <li><a href="/proyectos">Gestión de programas</a></li>
                             <li><a href="/proyectos/programas">Detalles de actividades</a></li>
-                            <li><a href="/proyectos/rep/fecha">Reporte de programas</a></li>
+                            <li><a href="/proyectos/rep/fecha">Reporte por programas</a></li>
 
                         </ul>
                     </li>
                     <li class="menu-has-children"><a href="#">Balance social cooperativo</a>
                         <ul>
                             <li><a href="/balance/prog">Progamas sociales</a></li>
-                            <li><a href="/balance/prog/ind">Progamas sociales con variables</a></li>
+                            <li><a href="/balance/seg/act">Actividades sociales </a></li>
+                            <li><a href="/balance/prog/ind">Reporte social</a></li>
                            {{-- <li><a href="/balance/act/prog">Actividades Sociales </a></li>--}}
-                            <li><a href="/balance/seg/act">Seguimientos act. sociales </a></li>
+                            
                         </ul>
                     </li>
 

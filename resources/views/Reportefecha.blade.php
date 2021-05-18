@@ -6,46 +6,66 @@
     <section class="tabla">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h1 class="panel-title">Reporte de seguimientos por fecha de la cooperativa <strong>{{$cooperativa->nombre}}</strong></h1>
+                <h1 class="panel-title">Reporte por programas  <strong>{{$cooperativa->nombre}}</strong> </h1>
             </div>
             <div class="panel-body">
-                <table class="table  table-bordered" id="tabla">
-                    <thead>
-                    <th>No</th>
-                    <th>Programa</th>
-                    <th>Presup. prog</th>
-                    <th>Actividad</th>
-                    <th>Responsable</th>
-                    <th>Presup. act</th>
-                    <th>Seguimiento</th>
-                    <th>Presup. seg plan</th>
-                    <th>NBF</th>
-                    <th>Presup. seg real</th>
-                    <th>NBR</th>
-                    <th>Fecha real</th>
-                    </thead>
-                    <tbody>
-                                {{$cont=1}}
-                    @foreach($seguimientos->sortByDesc('fecha_real') as $k => $seg)
-                        <tr>
-                        <td>{{$cont++ }}</td>
-                            <td>{{$seg->GetMeta->Programa->nomb_prog}}</td>
-                            <td>{{$seg->GetMeta->Programa->presupuesto_prog}}</td>
-                            <td>{{$seg->GetMeta->desc_unid_fisicas}}</td>
-                            <td>{{$seg->GetMeta->responsable}}</td>
-                            <td>{{$seg->GetMeta->presupuesto}}</td>
+                <table class="table   table-sm table-hover tabla" id="tabla">
+                 
+                 @foreach($seguimientos as $k => $seg)    
+               
+                  @if($nombreporgrama!=$seg->GetMeta->Programa->nomb_prog)
+                  <thead  class="thead-light">
+                            
+                            </thead>
+                  <tr><td colspan="10" align="center">
+                  <div class="alert alert-info id="alerta"  role="alert">
+                     Datos de programa {{$seg->GetMeta->Programa->nomb_prog}} con un presupuesto aprobado {{$seg->GetMeta->Programa->presupuesto_prog}}
+                    </div>
+                 
+                 </td></tr>
+                        <thead  class="thead-light">
+                            <th>No</th>
+                        
+                            <th>Actividad</th>
+                            <th>Responsable</th>
+                            <th>Presup. act</th>
+                            <th>Seguimiento</th>
+                            <th>Presup. seg plan</th>
+                            <th>NBF</th>
+                            <th>Presup. seg real</th>
+                            <th>NBR</th>
+                            <th>Fecha real</th>
+                            </thead>
+                           <?php  $nombreporgrama=$seg->GetMeta->Programa->nomb_prog ;
+                                $descunid_fisicas='vacio';
+                                $resposable ='vacio';
+                                $cont=1;
+                             
+                           ?>
+                            
+                        @else
+                        @endif
+                             <tbody>           
+                        
+                                <tr>
+                               {{-- <td>{{$k }}</td>--}}
+                               <td>{{$cont++ }}</td>
+                                    <td> {{  $descunid_fisicas!=$seg->GetMeta->desc_unid_fisicas ?  $descunid_fisicas=$seg->GetMeta->desc_unid_fisicas : "Igual"  }}    </td>
 
-                            <td>{{$seg->descripcion}}</td>
-                            <td>{{$seg->presup_con}}</td>
-                            <td>{{$seg->num_benef_planif}}</td>
-                            <td>{{$seg->presup_real}}</td>
-                            <td>{{$seg->num_beneficiarios_real}}</td>
-                            <td>{{$seg->fecha_real}}</td>
+                                    <td>{{ $resposable!= $seg->GetMeta->responsable ?  $resposable= $seg->GetMeta->responsable : "Igual" }}</td>
+                                    <td>{{$seg->GetMeta->presupuesto}}</td>
+
+                                    <td>{{$seg->descripcion}}</td>
+                                    <td>{{$seg->presup_con}}</td>
+                                    <td>{{$seg->num_benef_planif}}</td>
+                                    <td>{{$seg->presup_real}}</td>
+                                    <td>{{$seg->num_beneficiarios_real}}</td>
+                                    <td>{{$seg->fecha_real}}</td>
 
 
 
 
-                        </tr>
+                                </tr>
 
 
                     @endforeach

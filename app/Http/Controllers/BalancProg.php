@@ -75,11 +75,6 @@ class BalancProg extends Controller
         {
             $anos=Ano::all();
         }
-
-
-
-
-
         return view('BalanProg',[
             'anos' => $anos->sortByDesc('ano'),
             'id_coop'=>$id_coop,
@@ -173,8 +168,9 @@ class BalancProg extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function showBalanFed(CreateRequestFed $request){
+        //CreateRequestFed
+    public function showBalanFed( CreateRequestFed $request){
+       
         $id_ano=$request->input('ano');
         $id_coop=$request->input('coop');
         $ind=$request->input('ind');
@@ -441,7 +437,7 @@ class BalancProg extends Controller
                 ///Interes por la cumunidad
                 'intcom' => $intcom, 'intcom_ant' => $intcom_ant,*/
 
-                'indicadores' => $ind
+                'indicadores' => $ind,'presup_real'=>0
 
 
             ]);
@@ -454,8 +450,9 @@ class BalancProg extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function balanceTotal(CreateRequestFed $request){
-
+    //CreateRequestFed//
+    public function balanceTotal( CreateRequestFed $request){
+              // dd('dd') ;
         $cooper=Cooperativa::all();
         if(Auth::user()->Rol->nomb_rol=='Usuario'){
             //$coops=Cooperativa::find(Auth::user()->id_coop);
@@ -543,7 +540,7 @@ class BalancProg extends Controller
 
 
         }
-
+           // dd($coleccion_coop);
         return view('GenerarBalanceTotal',[
             'coleccion'=>$coleccion_coop,
             'cooperativas'=>$cooperativas,
@@ -663,13 +660,13 @@ class BalancProg extends Controller
 
 
         }
+   
 
         return view('GenerarBalanceActSeg',[
             'progs'=>$progs,
             'total_NB' => $total_NB,'ano'=>$ano,'si_tiene_metas'=>$si_tiene_metas,'nomb_prog'=>$nomb_prog,'nomb_met'=>$nomb_met,'premisa'=>$pre,
             'cond_mat'=>$cond_mat,'nomb_coop'=> $user->Cooperativa
-            /*'cantAsoc'=>$cantAsoc,'incBaj'=>$incBaj, 'nivEscAsoc'=>$nivEscAsoc, 'nivEscEmp'=>$nivEscEmp,'est_civil'=>$est_civil,'comp_edad_asoc'=>$comp_edad_asoc,
-            'tiempo_afili'=>$tiempo_afili*/
+            
         ]);
 
     }

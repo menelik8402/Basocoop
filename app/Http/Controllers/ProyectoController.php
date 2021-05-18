@@ -39,8 +39,9 @@ class ProyectoController extends Controller
                 }
                // $año = Ano::all();
             }
-            //dd($proy[0]->Ano);
-            return view('proyectos', ['proy' => $proy, 'ano' => $año,'privilegios'=>$privilegios]);
+            //dd();
+           
+            return view('proyectos', ['proy' => $proy->sortBy("id"), 'ano' => $año->sortByDesc('ano'),'privilegios'=>$privilegios]);
         }
         else
             return redirect('/logout');
@@ -86,7 +87,10 @@ public function repFecha(Request $request,$id_coop=null){
         //$seguimientos=Seguimientometa::where('id_cooperativa','=',$id_cooperativa)->orderBy('created_at')->get();
     return view('Reportefecha',[
         'seguimientos' => $seguimientos,
-        'cooperativa'=>$cooperativa
+        'cooperativa'=>$cooperativa,
+        'nombreporgrama'=>'ninguno',
+        'descunid_fisicas'=>'vacio',
+        'resposable' => 'vacio'
 
     ]);
 }
@@ -155,7 +159,7 @@ $metas=collect();
         $user= Auth::user();
         $idcoop=$user->id_coop;
         $proy = Programa::where('id_cooperativa','=',$idcoop)->get();
-
-        return view('programas', ['proy' => $proy]);
+     
+        return view('programas', ['proy' => $proy->sortBy("id")]);
     }
 }

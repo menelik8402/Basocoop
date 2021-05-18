@@ -38,29 +38,12 @@ class MetaController extends Controller
 
     public function create(Create_Metas_Request $request)
     {
-
-
         $responsable = $request->responsable;
         $presupuesto1 = $request->presupuesto;
         $descUnidadesFisicas = $request->descUnidadesFisicas;
-       // $manifNum = $request->manifNum;
         $planUF = $request->planUF;
         $beneficiosPlan = $request->beneficiosPlan;
-       /* $unidFisicasReales = $request->unidFisicasReales;
-        $benefReales = $request->benefReales;
-        $ufSatif = $request->ufSatif;
-        $benSatif = $request->benSatif;*/
-        //$fechaCumplimiento = $request->fechaCumplimiento;
-
-
-//
         $idProg = $request->idProg;
-/*
-        Metas::create(['responsable'=>$responsable,'presupuesto'=>$presupuesto1,
-            'desc_unid_fisicas'=>$descUnidadesFisicas,'manif_num'=>$manifNum,'unid_fisicas_plan'=>$planUF,
-            'beneficiarios_plan'=>$beneficiosPlan,'unid_fisicas_real'=>$unidFisicasReales,
-            'beneficiarios_real'=>$benefReales,'unid_fisicas_satif'=>$ufSatif,'beneficiarios_satif'=>$benSatif,
-            'fecha_cumplimiento'=>$fechaCumplimiento,'id_programa'=>$idProg]);*/
 
         Metas::create(['responsable'=>$responsable,'presupuesto'=>$presupuesto1,
             'desc_unid_fisicas'=>$descUnidadesFisicas,'unid_fisicas_plan'=>$planUF,
@@ -207,21 +190,26 @@ class MetaController extends Controller
             if ($presup_real < $presup_con && $presup_real != 0) {
                 /* dd($presup_con);*/
 
-
+                 //obteniendo la meta y el programa del seguimiento       
                 $meta = Metas::find($seg->id_meta);
                 $programa = Programa::find($meta->id_programa);
 
+                 //diferencia entre el presupuesto de real del seguimiento y el presupuesto planificado del seguimiento   
                 $dif_presup = $presup_con - $presup_real;
                // dd($dif_presup);
                 $presup_met = $meta->presupuesto;
                 $presup_progra = $programa->presupuesto_prog;
 
+                 //el presupuesto de la meta es actualizado con el presupuesto actual mennos la diferencia   
                 $meta->presupuesto = $presup_met - $dif_presup;
 
+                 //el presupuesto del programa es actualizado con el presupuesto actual mennos la diferencia      
                 $programa->presupuesto_prog = $presup_progra - $dif_presup;
 
                 $meta->save();
                 $programa->save();
+
+                //falta contabilizar la diferencia y actualizar en caso de que el presupuesto planificado de la actividad no se coja completo
 
 
             }

@@ -17,7 +17,7 @@
                         <th class="pull-right">Opciones</th>
                         </thead>
                         <tbody>
-                        @foreach($ano as $i => $a) {{--< investigar que cosa es $i aqui pero parece que es un iterador>--}}
+                        @foreach($ano as $i => $a) 
                             <tr id="item_{{$a->id}}">
                                 <td id="id_{{$a->id}}">{{$a->ano}}</td>
 
@@ -65,11 +65,11 @@
                     {{--@if(  $privilegios->codigo_priv=='CM'&& $privilegios->accion_add==true && $privilegios->id_user=@\Illuminate\Support\Facades\Auth::user()->id )
 
                   --}}
-                    @if($desabilitar_new==false)
+                {{--    @if($desabilitar_new==false)--}}
                     <a data-toggle="modal" data-target="#modal" href="#" class="btn-sm boton pull-right mt-1"><i class="fa fa-plus"></i> Nuevo
 
                     </a>
-                        @endif
+                        {{--@endif--}}
                 </div>
             </div>
         </section>
@@ -110,7 +110,7 @@
                                 <div class="form-group row">
                                     <label for="0" class="col-sm-6 col-form-label">Año</label>
                                     <div class="col-sm-5">
-                                       {{-- <select id="0" class="form-control">
+                                       <select id="0" class="form-control">
                                             @for($a=2019;$a<=date("Y");$a++)
 
 
@@ -121,9 +121,9 @@
                                                     @endif
 
                                             @endfor
-                                        </select>--}}
+                                        </select>
 
-                                        <input type="number" id="0" name="0" value="{{date("Y")}}" class="form-control" readonly>
+                                       {{-- <input type="number" id="0" name="0" value="{{date("Y")}}" class="form-control" readonly>--}}
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -324,9 +324,17 @@
                                 </div>
 
                                 <div class=" form-group row">
-                                    <label for="4" class="col-sm-6 col-form-label">Total Presupuesto</label>
+                                    <label for="4" class="col-sm-6 col-form-label"> Presupuesto aprobado</label>
                                     <div class="col-sm-5">
                                         <input type="number" id="total_pre" name="total_pre" step="any" readonly class="form-control">
+
+                                    </div>
+
+                                </div>
+                                <div class=" form-group row">
+                                    <label for="4" class="col-sm-6 col-form-label"> Recursos Disponibles</label>
+                                    <div class="col-sm-5">
+                                        <input type="number" id="actual_pre" name="actual_pre" step="any" readonly class="form-control">
 
                                     </div>
 
@@ -645,6 +653,28 @@
                         alert('Ha ocurrido un error al cargar los datos. Contacte con el administrador del sistema.')
                     }
                 });
+               // alert('/DispPresup/' + a.ano + '/' + {!! $pre !!}[0].id_cooperativa);
+
+
+                $.ajax({
+                       type: 'GET',
+                       url: '/DispPresup/' + a.id + '/' + {!! $pre !!}[0].id_cooperativa,
+                       data: {
+                           _token: '{{ csrf_token() }}',
+
+                       },
+
+                       success: function (data) {
+                           var presup = data.presup;
+                           $('#actual_pre').val(presup);
+                           $('#actual_pre').attr('max', presup);
+                           $('#actual_pre').attr('readonly', false)
+
+
+                       }, error: function () {
+                           alert('Error intentando buscar el presupuesto actual');
+                       }
+                   });
 
 
 
@@ -727,7 +757,7 @@
                         error: function (jqXHR ) {
 
                             var arr=jQuery.parseJSON(jqXHR.responseText);
-
+                               // alert(jqXHR.responseText);
                             if(arr['errors']!=null) {
                                 var claves =Object.keys(arr['errors']);
                                 //console.log(claves);

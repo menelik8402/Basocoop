@@ -11,7 +11,7 @@
         <section class="tabla">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h1 class="panel-title">Interés por la comunidad</h1>
+                    <h1 class="panel-title">Interés por la Cooperativa</h1>
                 </div>
                 <div class="panel-body">
                     <table class="table  table-bordered" id="tabla">

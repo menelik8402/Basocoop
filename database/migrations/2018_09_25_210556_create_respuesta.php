@@ -17,7 +17,7 @@ class CreateRespuesta extends Migration
             $table->increments('id');
             $table->integer('id_encuesta')->unsigned();
             $table->integer('id_pregunta')->unsigned();
-            $table->string('respuesta');
+            $table->text('respuesta');
             $table->foreign('id_encuesta')->references('id')->on('encuesta');
             $table->foreign('id_pregunta')->references('id')->on('pregunta');
 

@@ -21,8 +21,8 @@ class CreatePrograma extends Migration
             $table->string('objetivo');
             $table->integer('id_cooperativa')->unsigned();
             $table->foreign('id_cooperativa')->references('id')->on('cooperativa');
-              $table->double('presupuesto_prog');
-              $table->string('metodologia');
+            $table->double('presupuesto_prog');
+            $table->text('metodologia');
 //            $table->integer('id_premisas');
 //            $table->foreign('id_premisas')->references('id')->on('premisas');
             $table->rememberToken();

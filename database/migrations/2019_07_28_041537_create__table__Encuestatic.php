@@ -48,8 +48,8 @@ class CreateTableEncuestatic extends Migration
             $table->char('act_soc_adult_mayor',1)->default('D');
             $table->char('act_soc_enc_asoc',1)->default('D');
             $table->char('act_soc_festiv',1)->default('D');
-            $table->string('act_soc_festiv_cuales')->nullable();
-            $table->string('actividades')->nullable();//actividades recreativas
+            $table->text('act_soc_festiv_cuales')->nullable();
+            $table->text('actividades')->nullable();//actividades recreativas
 
 
             $table->char('seguro_vida',1)->default('D');
@@ -57,7 +57,7 @@ class CreateTableEncuestatic extends Migration
             /* $table->char('seguro_salud',1)->default('D');*/
            /* $table->string('seguro_salud_no');//explicacion de pq no tiene seguro de salud*/
             $table->char('seguro_vehic',1)->default('D');
-            $table->string('seguro_vehic_no')->nullable();////explicacion de pq no tiene seguro de de vehiculo
+            $table->text('seguro_vehic_no')->nullable();////explicacion de pq no tiene seguro de de vehiculo
 
 
             $table->char('pers_enferm',1)->default('D');
@@ -66,20 +66,20 @@ class CreateTableEncuestatic extends Migration
 
             $table->char('ninos',1)->default('D');
             $table->char('ayuda_ninos',1)->default('D');//ayuda a ninos
-            $table->string('ayuda_ninos_si')->nullable();//que tipo de ayuda pudiea dar la cooperativa en caso de que si el anterior
+            $table->text('ayuda_ninos_si')->nullable();//que tipo de ayuda pudiea dar la cooperativa en caso de que si el anterior
 
             $table->char('serv_funerarios',1)->default('D');
             $table->string('arg_serv_fun')->nullable();
             $table->char('ayuda_serv_fun',1)->default('D');
 
-            $table->string('part_act_sociales')->nullable();//cuales actividades sociales
-            $table->string('act_coop_jov_nin')->nullable();
+            $table->text('part_act_sociales')->nullable();//cuales actividades sociales
+            $table->text('act_coop_jov_nin')->nullable();
 
             $table->char('linea_cred',1)->default('D');
-            $table->string('otras_act_des_med_am')->nullable();
+            $table->text('otras_act_des_med_am')->nullable();
 
             $table->char('act_reforest',1)->default('D');//actividad de reforestacion
-            $table->string('act_reforest_donde')->nullable();
+            $table->text('act_reforest_donde')->nullable();
             $table->char('caj_aut',1);
             $table->char('nec_caj_aut',1);
 

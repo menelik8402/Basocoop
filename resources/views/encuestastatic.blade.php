@@ -46,7 +46,7 @@
 
                                                     <div class="form-horizontal     ">
                                                         <div>
-                                                            <label class="control-label">Usted es :</label>
+                                                            <label class="control-label">Usted es:</label>
                                                             <div class="form-inline @if($errors->has('tipo')) border-danger @endif">
                                                                 <label class="mx-1">
                                                                     <input type="radio" name="tipo" class="mx-1" {{ old('tipo')=='A' ? 'checked' : ''}}  value="A">
@@ -275,7 +275,7 @@
                                                                                         </span>
 
                                                                                         <span class="form-control mx-2">
-                                                                                             <input type="checkbox" name="capa_filos_coop" class="mx-1"   {{ old('capa_filos_coop')=='Filosofía Cooperativa' ? 'checked' : ''}} value="Filosofía Cooperativa">
+                                                                                             <input type="checkbox" name="capa_filos_coop" class="mx-1"   {{ old('capa_filos_coop')=='Filosofía cooperativa' ? 'checked' : ''}} value="Filosofía Cooperativa">
                                                                                             Filosofía Cooperativa
                                                                                         </span>
 
@@ -318,7 +318,7 @@
                                                                                         <div class="form-group">
                                                                                             <label class="control-label mt-2">En caso de seleccionar oficios especifique cuáles </label>
                                                                                          <span class="form-group mx-2 @if($errors->has('capa_ofic_cual')) border-danger @endif">
-                                                                                            <textarea name="capa_ofic_cual" id="capa_ofic_cual" class="form-control mx-1" cols="115" rows="2"  readonly  placeholder="Especifique los oficios..." >{{old('capa_ofic_cual')}}</textarea>
+                                                                                            <textarea name="capa_ofic_cual" id="capa_ofic_cual" class="form-control mx-1" cols="115" rows="2"  readonly  placeholder="Especifique los oficios" >{{old('capa_ofic_cual')}}</textarea>
 
                                                                                         </span>
                                                                                             @foreach($errors->get('capa_ofic_cual') as $error)
@@ -328,12 +328,12 @@
                                                                                         </div>
 
 
-                                                                                        <label class="control-label mt-2">Especifique si prefiere la inclusión de otros cursos :</label>
+                                                                                        <label class="control-label mt-2">Especifique si prefiere la inclusión de otros cursos:</label>
 
                                                                                         <div class="form-group @if($errors->has('otroscursos')) border-danger @endif">
 
 
-                                                                                            <textarea cols="50" rows="2" class="form-control mx-2"  placeholder="Especifique otros cursos..." id="otroscursos"  name="otroscursos">{{old('cursos')}}</textarea>
+                                                                                            <textarea cols="50" rows="2" class="form-control mx-2"  placeholder="Especifique otros cursos" id="otroscursos"  name="otroscursos">{{old('cursos')}}</textarea>
 
 
                                                                                         </div>
@@ -347,7 +347,7 @@
 
                                                                             <br>
                             <div class="form-inline mx-1 @if($errors->has('tiene_auto')) border-danger @endif">
-                                <label class="control-label mt-2" >Tiene auto :</label>
+                                <label class="control-label mt-2" >Tiene auto:</label>
                                 <span class=" form-control mx-1">
                                     <input type="radio" name="tiene_auto"  class="form-control mx-1" {{ old('tiene_auto')=='S' ? 'checked' : ''}} value="S">
                                     Si
@@ -367,7 +367,7 @@
                             <div class="form-inline mx-1 @if($errors->has('rep_auto')) border-danger @endif">
 
 
-                                <label class="control-label" >Necesita reparar su auto :</label>
+                                <label class="control-label" >Necesita reparar su auto:</label>
                                 <span class="form-control mx-1" >
                                     <input type="radio" name="rep_auto"   class="form-control mx-1"  {{ old('rep_auto')=='S' ? 'checked' : ''}}  value="S">
                                     Si
@@ -458,9 +458,9 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="control-label mt-2">En caso de seleccionar festivales especifique cuáles festivales prefiere. </label>
+                                        <label class="control-label mt-2">En caso de seleccionar festivales especifique cuáles festivales prefiere </label>
                                         <span class="form-group mx-2 @if($errors->has('act_soc_festiv_cuales')) border-danger @endif">
-                                                                                            <textarea name="act_soc_festiv_cuales"  id="act_soc_festiv_cuales" class="form-control mx-1" cols="115"  rows="2" readonly placeholder="Especifique algún festival..." >{{old('act_soc_festiv_cuales')}}</textarea>
+                                                                                            <textarea name="act_soc_festiv_cuales"  id="act_soc_festiv_cuales" class="form-control mx-1" cols="115"  rows="2" readonly placeholder="Especifique algún festival" >{{old('act_soc_festiv_cuales')}}</textarea>
                                                                                         </span>
                                         @foreach($errors->get('act_soc_festiv_cuales') as $error)
                                             <div class="form-control-feedback text-danger">{{$error}}</div>
@@ -504,7 +504,7 @@
 
                                 <div class="form-horizontal mt-1">
                                     <label class="control-label mt-3">
-                                        En caso de que su respuesta sea negativa explique por qué no tiene seguro de vida :
+                                        En caso de que su respuesta sea negativa explique por qué no tiene seguro de vida:
                                     </label>
 
                                     <textarea cols="115" rows="2" class="form-control @if($errors->has('seguro_vida_no')) border-danger @endif "     name="seguro_vida_no"  id="seguro_vida_no">{{old('seguro_vida_no')}}</textarea>
@@ -533,7 +533,7 @@
                                 </div>
                                 <div class="form-horizontal mt-1">
                                     <label class="control-label mt-1" >
-                                        En caso de que su respuesta sea negativa explique por qué no tiene seguro de vehículo :
+                                        En caso de que su respuesta sea negativa explique por qué no tiene seguro de vehículo:
                                     </label>
                                     <textarea cols="115" rows="2" class="form-control"   name="seguro_vehic_no" id="seguro_vehic_no" >{{old('seguro_vehic_no')}}</textarea>
                                 </div>
@@ -564,18 +564,18 @@
                             </div>
 
                             <div class="form-horizontal @if($errors->has('enfer_padece')) border-danger @endif">
-                                <label   > Especifique la enfermedad que padece(n) :</label>
+                                <label   > Especifique la enfermedad que padece(n)</label>
 
-                                <textarea cols="115" rows="2" placeholder="Especifique la enfermedad que padece.."  class="form-control"  name="enfer_padece" value="  " id="enfer_padece"> {{old('enfer_padece')}}</textarea>
+                                <textarea cols="115" rows="2" placeholder="Especifique la enfermedad que padece"  class="form-control"  name="enfer_padece" value="  " id="enfer_padece"> {{old('enfer_padece')}}</textarea>
                                 @foreach($errors->get('enfer_padece') as $error)
                                     <div class="form-control-feedback text-danger">{{$error}}</div>
                                 @endforeach
                             </div>
 
                             <div class="form-horizontal @if($errors->has('enfer_padece_apoyo')) border-danger @endif">
-                                <label class="control-label" > Necesita algún tipo  apoyo :</label>
+                                <label class="control-label" > Necesita algún tipo  apoyo:</label>
 
-                                <textarea cols="115" rows="2" placeholder="Especifique que tipo de apoyo necesita.."  class="form-control" name="enfer_padece_apoyo" id="enfer_padece_apoyo">{{old('enfer_padece_apoyo')}}</textarea>
+                                <textarea cols="115" rows="2" placeholder="Especifique que tipo de apoyo necesita"  class="form-control" name="enfer_padece_apoyo" id="enfer_padece_apoyo">{{old('enfer_padece_apoyo')}}</textarea>
                                 @foreach($errors->get('enfer_padece_apoyo') as $error)
                                     <div class="form-control-feedback text-danger">{{$error}}</div>
                                 @endforeach
@@ -620,7 +620,7 @@
                                     </div>
 
                                   <div class="form-horizontal @if($errors->has('cuidados')) border-danger @endif ">
-                                    <label class="control-label" > Mecione qué cuidados pudiera la cooperativa brindar en favor de los niños :</label>
+                                    <label class="control-label" > Mecione qué cuidados pudiera la cooperativa brindar en favor de los niños:</label>
 
                                     <textarea cols="115" rows="2" placeholder="Mencione algunos cuidados" class="form-control"  name="cuidados" id="cuidados">{{old('cuidados')}}</textarea>
                                       @foreach($errors->get('cuidados') as $error)
@@ -631,7 +631,7 @@
 
 
                                         <div class="form-horizontal">
-                                            <label class="control-label">¿Usted ha necesitado acceder a los servicios funerarios?:  </label>
+                                            <label class="control-label">¿Usted ha necesitado acceder a los servicios funerarios?  </label>
                                             <div class="form-inline @if($errors->has('serv_funeb')) border-danger @endif ">
                                             <span class="form-control mx-1" >
                                                 <input type="radio" name="serv_funeb" class="form-control" id="serv_funeb" {{ old('serv_funeb')=='S' ? 'checked' : ''}}  value="S">
@@ -669,7 +669,7 @@
 
                                     <div class="form-horizontal @if($errors->has('serv_funb_ayu')) border-danger @endif">
 
-                                    <label  > ¿De que forma ha accedido a estos servicios ?</label>
+                                    <label  > ¿De que forma ha accedido a estos servicios?</label>
 
                                     <textarea cols="115" rows="2"  class="form-control" readonly id="serv_funb_argum" name="serv_funb_argum" >{{old('serv_funb_argum')}}</textarea>
                                         @foreach($errors->get('serv_funb_argum') as $error)

@@ -40,7 +40,7 @@
                         </div>
                             <label  > Mencione alugnas de esas actividades:</label>
 
-                            <textarea cols="30" rows="4" placeholder="Especifique en que actividades participa.." class="form-control" name="act_coop_text"></textarea>
+                            <textarea cols="30" rows="4" placeholder="Especifique en que actividades participa" class="form-control" name="act_coop_text"></textarea>
 
 
 
@@ -111,11 +111,11 @@
                         </div>
                         <div class="form-horizontal mt-2">
                             <label for="nece_soc_acc" >Acciones a desarrollar para lograr las nesecidades sociales </label>
-                            <textarea cols="30" rows="4" placeholder="Diga las acciones para lograr las necesidades sociales de la cooperativa.. " name="nece_soc_acc" class="form-control"></textarea>
+                            <textarea cols="30" rows="4" placeholder="Diga las acciones para lograr las necesidades sociales de la cooperativa " name="nece_soc_acc" class="form-control"></textarea>
                         </div>
                         <div class="form-horizontal mt-2">
                             <label for="act_nin_jov" >Qué actividades pudiera realizar la cooperativa en función de los niños y jóvenes </label>
-                            <textarea cols="35" rows="4" placeholder="Actividades que puede realizar la cooperativa en funcion de niños y jovenes... " name="act_nin_jov" class="form-control"></textarea>
+                            <textarea cols="35" rows="4" placeholder="Actividades que puede realizar la cooperativa en funcion de niños y jovenes " name="act_nin_jov" class="form-control"></textarea>
                         </div>
 
 
@@ -131,7 +131,7 @@
 
                             <div class="form-horizontal">
                                 <label  > Manifieste cualquier otra idea que considere importante para el desarrollo de la  cooperativa</label>
-                                <textarea cols="30" rows="4" placeholder="Actividades que puede realizar la cooperativa en funcion de niños y jovenes... " name="otra_idea_coop" class="form-control"></textarea>
+                                <textarea cols="30" rows="4" placeholder="Actividades que puede realizar la cooperativa en funcion de niños y jovenes " name="otra_idea_coop" class="form-control"></textarea>
                             </div>
 
 

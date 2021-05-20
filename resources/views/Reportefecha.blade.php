@@ -50,9 +50,9 @@
                                 <tr>
                                {{-- <td>{{$k }}</td>--}}
                                <td>{{$cont++ }}</td>
-                                    <td> {{  $descunid_fisicas!=$seg->GetMeta->desc_unid_fisicas ?  $descunid_fisicas=$seg->GetMeta->desc_unid_fisicas : "Igual"  }}    </td>
+                                    <td> {{  $descunid_fisicas!=$seg->GetMeta->desc_unid_fisicas ?  $descunid_fisicas=$seg->GetMeta->desc_unid_fisicas : "Se mantiene"  }}    </td>
 
-                                    <td>{{ $resposable!= $seg->GetMeta->responsable ?  $resposable= $seg->GetMeta->responsable : "Igual" }}</td>
+                                    <td>{{ $resposable!= $seg->GetMeta->responsable ?  $resposable= $seg->GetMeta->responsable : "Se mantiene" }}</td>
                                     <td>{{$seg->GetMeta->presupuesto}}</td>
 
                                     <td>{{$seg->descripcion}}</td>

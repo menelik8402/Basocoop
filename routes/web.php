@@ -136,6 +136,12 @@ Route::post('/EliminarM', [
     'uses' =>'MetaController@eliminar'
 ])-> name('EliminarM');
 
+Route::get('/buscar/Disp/Planif/{id}', [
+    'middleware' => 'user.avanz',
+    'uses' => 'MetaController@buscarPresupPlanif'
+]);
+
+
 Route::post('/Eliminar3', 'EncuestaController@eliminar')-> name('Eliminar3');
 Route::post('/editencuesta', 'EncuestaController@editencuesta');
 

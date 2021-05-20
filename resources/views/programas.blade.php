@@ -9,10 +9,14 @@
                     <h1 class="panel-title">Actividades por programas</h1>
                 </div>
                 <div class="alert alert-success" id="alerta" style="display: none" role="alert">
-                    Se añadió correctamente el seguimiento.
+                    !!!Se añadió correctamente el seguimiento.!!!
                 </div>
                 <div class="alert alert-success" id="alerta1" style="display: none" role="alert">
-                    Se eliminó correctamente el último seguimiento.
+                   !!! Se eliminó correctamente el último seguimiento.!!!
+                </div>
+
+                <div class="alert alert-danger" id="alerta2" style="display: none" role="alert">
+                  
                 </div>
 
                 <div class="panel-body">
@@ -34,7 +38,11 @@
 
 
                                    <div class="panel panel-warning justify-content-center">
-                                       <div class="panel-heading ">Actividades</div>
+                                       <div class="panel-heading ">
+                                       <h4 class="panel-title">
+                                        <a data-toggle="collapse"  href="#collapse1_{{$p->id}}">Actividades</a>
+                                      </h4></div>
+                                     <div id="collapse1_{{$p->id}}" class="panel-collapse collapse">
                                            <div class="panel-body">
 
 
@@ -64,7 +72,7 @@
                                                </table>
 
                                        </div>
-
+                                    </div>
                                    </div>
 
 
@@ -132,6 +140,7 @@
                            </thead>
                              <tbody>
 
+                            
 
                              </tbody>
 
@@ -272,7 +281,10 @@
         var ult_fecha_seg='1975-01-01';
         var cant_seguimientos=0 ;
         var mi_matriz = new Array();
-
+        var ufp_metpp = 0;
+        var nbf_metpp = 0;
+        var presup_control=0;
+        
         $(document).ready(function () {
            // tablaDT = tabla.DataTable();
 
@@ -354,7 +366,7 @@
                         }
                         
                      
-                      if(ufp_met>=0 && nbf_met>0){   
+                      if(ufp_met>0 && nbf_met>0){   
                            
                         tabla.append(
 
@@ -362,13 +374,46 @@
                             ' <td class="col-sm-4" > '+ '<textarea id="descrip" rows="1" class="form-control"> </textarea>' +'</td>'+
                             ' <td class="col-sm-2" > '+ ' <input type="number" id="pcon"  min="0" value="0"  class="form-control " required>' +'</td>'+
                             ' <td class="col-sm-2" > '+ ' <input type="number" id="ufp_fijo"  min="0"  value=1 readonly  max="'+ufp_met+'" class="form-control " required>' +'</td>'+
-                            ' <td class="col-sm-2" > '+ ' <input type="number" id="ufp"  min="0"  value="'+ufp_met+'" readonly  max="'+ufp_met+'" class="form-control " required>' +'</td>'+
+                            ' <td class="col-sm-2" > '+ ' <input type="number" id="ufp"  min="1"  value="'+ufp_met+'" readonly  max="'+ufp_met+'" class="form-control " required>' +'</td>'+
                             ' <td class="col-sm-2" > '+ ' <input type="number" id="nbp"  min="1"   value="'+nbf_met+'" max="'+nbf_met+'"  class="form-control " required>' +'</td>'+
                             ' <td  > '+ ' <input type="date" id="fechaseg" min="'+idano+'-01-01" max="'+idano+'-12-31"  class="form-control "   required>' +'</td>'+
                             ' </tr>'
 
 
                         )
+                      }
+                      else
+                      {
+                       
+                            if(ufp_met<=0){
+                                    tabla.append(
+
+                                        '<tr>'+
+                                            '<td colspan=6>'+
+                                            ' <div class="alert alert-danger" id="alerta"  role="alert">'+
+                                                ' No puede añadir mas seguimientos las unidades fisicas planificadas no pueden ser cero.'+
+                                            ' </div>'+
+
+                                            '</td>'+
+                                            
+                                        '</tr>'
+                                    )
+                            }
+                            else{
+
+                                tabla.append(
+
+                                    '<tr>'+
+                                        '<td colspan=6>'+
+                                        ' <div class="alert alert-danger" id="alerta"  role="alert">'+
+                                            ' No puede añadir mas seguimientos el número  de beneficiarios planificados o número de unidades fisicas no pueden ser cero.'+
+                                        ' </div>'+
+
+                                        '</td>'+
+                                        
+                                    '</tr>'
+                                    )
+                            }
                       }
                       
                         presup_total=parseInt(data.meta.presupuesto)-presup_total;
@@ -380,6 +425,10 @@
                         $('#pcon').attr('max',presup_total);
                         $('#pcon').val(presup_total);
 
+                        presup_control=presup_total;
+                        ufp_metpp = parseInt($('#ufp').val());
+                        nbf_metpp = parseInt($('#nbp').val());
+                        
                          // $('h5').val('seguimos en com');
 
                         $('#modalMemb').modal('show');
@@ -441,9 +490,9 @@
                                     ' <td class="col-sm-1"  > ' + '<input type="text" class="form-control" readonly id="num_benef_planif_' + data.seg_met[k].id + '" value="' + data.seg_met[k].num_benef_planif + '">' + '</td>' +
                                     //fecha en que se planifica el detalle de la actividad
                                     ' <td class="col-sm-2"  > ' + '<input type="date" class="form-control" readonly id="fecha_seguimiento_' + data.seg_met[k].id + '" value="' + data.seg_met[k].fecha_seguimiento + '">' + '</td>' +
-                                    ' <td class="col-sm-1"  > ' + '<input type="number" class="form-control" id="presup_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].presup_real + '" max="' + data.seg_met[k].presup_con + '">' + '</td>' +
+                                    ' <td class="col-sm-1"  > ' + '<input type="number" class="form-control" min="0" id="presup_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].presup_real + '" max="' + data.seg_met[k].presup_con + '">' + '</td>' +
                                     ' <td class="col-sm-1"  >  ' + '<input type="number" class="form-control" id="unid_fisicas_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].unid_fisicas_planif + '" readonly max="' + data.seg_met[k].unid_fisicas_planif + '">' + '</td>' +
-                                    ' <td class="col-sm-1"  > ' + '<input type="number" class="form-control" id="num_beneficiarios_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].num_beneficiarios_real + '"  >' + '</td>' + /* max="'+data.seg_met[k].num_benef_planif+'"*/
+                                    ' <td class="col-sm-1"  > ' + '<input type="number" class="form-control" min="0" id="num_beneficiarios_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].num_beneficiarios_real + '"  >' + '</td>' + /* max="'+data.seg_met[k].num_benef_planif+'"*/
                                     ' <td class="col-sm-1"  > ' + '<input type="text" class="form-control"  readonly value="' + Math.round(parseInt(data.seg_met[k].unid_fisicas_real) * 100 / parseInt(data.seg_met[k].unid_fisicas_planif)) + '">' + '</td>' +
                                     ' <td class="col-sm-1"  > ' + '<input type="text" class="form-control" readonly value="' + Math.round(parseInt(data.seg_met[k].num_beneficiarios_real) * 100 / parseInt(data.seg_met[k].num_benef_planif)) + '">' + '</td>' +
                                     ' <td class="col-sm-2"  > ' + '<input type="date" class="form-control" min="'+idano+'-01-01"  max="'+idano+'-12-31"  id="fecha_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].fecha_real + '" >' + '</td>' +
@@ -464,7 +513,7 @@
                                     ' <td class="col-sm-2"  > ' + '<input type="date" class="form-control" readonly id="fecha_seguimiento_' + data.seg_met[k].id + '" value="' + data.seg_met[k].fecha_seguimiento + '">' + '</td>' +
                                     ' <td class="col-sm-1"  > ' + '<input type="number" class="form-control" readonly  id="presup_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].presup_real + '" max="' + data.seg_met[k].presup_con + '">' + '</td>' +
                                     ' <td class="col-sm-1"  >  ' + '<input type="number" class="form-control" readonly id="unid_fisicas_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].unid_fisicas_real + '" max="' + data.seg_met[k].unid_fisicas_planif + '">' + '</td>' +
-                                    ' <td class="col-sm-1"  > ' + '<input type="number" class="form-control" readonly id="num_beneficiarios_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].num_beneficiarios_real + '"  >' + '</td>' + /* max="'+data.seg_met[k].num_benef_planif+'"*/
+                                    ' <td class="col-sm-1"  > ' + '<input type="number" class="form-control" min="0"  readonly id="num_beneficiarios_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].num_beneficiarios_real + '"  >' + '</td>' + /* max="'+data.seg_met[k].num_benef_planif+'"*/
                                     ' <td class="col-sm-1"  > ' + '<input type="text" class="form-control"  readonly value="' + Math.round(parseInt(data.seg_met[k].unid_fisicas_real) * 100 / parseInt(data.seg_met[k].unid_fisicas_planif)) + '">' + '</td>' +
                                     ' <td class="col-sm-1"  > ' + '<input type="text" class="form-control" readonly value="' + Math.round(parseInt(data.seg_met[k].num_beneficiarios_real) * 100 / parseInt(data.seg_met[k].num_benef_planif)) + '">' + '</td>' +
                                     ' <td class="col-sm-2"  > ' + '<input type="date" class="form-control" readonly  min="'+idano+'-01-01"  max="'+idano+'-12-31"  id="fecha_real_' + data.seg_met[k].id + '" value="' + data.seg_met[k].fecha_real + '" >' + '</td>' +
@@ -505,16 +554,17 @@
 
 
 
-            //guardando un seguimiento nuevo
-           //&& ufp_met >= parseInt($('#pcon').val()) && nbf_met >= parseInt($('#nbp').val())
+            //guardando un seguimiento nuevo en el proceso de planificacion 
+           
               $('#AddMemb').click(function () {
+               
 
                     if($('#descrip').val()!=' ') {
                         if (Date.parse(ult_fecha_seg) <= Date.parse($('#fechaseg').val())) {
 
                             if (presup_total >= 0 && parseInt($('#pcon').val()) >= 0) {
 
-
+                               
                                 var descripcion = $('#descrip').val();
                                 var presup_con = $('#pcon').val();
                                 var unid_fisicas_planif = $('#ufp_fijo').val();
@@ -530,138 +580,159 @@
                                     alert('El presupuesto para el seguimiento excede a el presupuesto para la meta,el seguimiento no se insertara')
                                 }
                                 else {
+                                        // calculando variables para agregar la fila con los controlles
+                                        // presup_control=parseInt($('#pcon').val());
+                                        // ufp_metpp=parseInt($('#ufp').val());
+                                         //nbf_metpp=parseInt($('#nbp').val());
+
+                                        
 
 
-                                    $.ajax({
-                                        type: 'POST',
-
-                                        url: '/insertar',
-                                        data: {
-                                            _token: '{{ csrf_token() }}',
-
-
-                                            descripcion: descripcion,
-                                            presup_con: presup_con,
-                                            unid_fisicas_planif: unid_fisicas_planif,
-                                            num_benef_planif: num_benef_planif,
-                                            fecha_seguimiento: fecha_seguimiento,
-                                            id_meta: id_meta,
-                                            unid_fisicas_real: unid_fisicas_real,
-                                            num_beneficiarios_real: num_beneficiarios_real,
-                                            presup_real: presup_real,
-                                            fecha_real: fecha_real
-
-
-                                        },
-
-                                        success: function (data) {
-                                            //location.reload();
-                                            //se inserto correctamente el seguimiento
-
-                                            tabla.append(
-                                                '<tr>' +
-                                                ' <td> ' + descripcion + '</td>' +
-                                                ' <td> ' + presup_con + '</td>' +  //este es preuspuesto que se planifica a pincipio de ano para este detalle de la acividad
-                                                ' <td> ' + 1 + '</td>' +
-                                                ' <td> ' + unid_fisicas_planif + '</td>' +
-                                                ' <td> ' + num_benef_planif + '</td>' +
-                                                ' <td> ' + fecha_seguimiento + '</td>' + //fecha en que se planifica el detalle de la actividad
-
-                                                ' </tr>'
-                                            );
-                                           /* alert(55);
-                                            return 0;*/
-                                            var url_t = '/seguimiento/meta/' + idmeta
-                                            var ufp_metp = 0;
-                                            var nbf_metp = 0;
-                                            var presup_totalp = 0
-
-
+                                        //inserto el seguimiento
                                             $.ajax({
-                                                type: 'GET',
-                                                url: url_t,
+                                                type: 'POST',
+
+                                                url: '/insertar',
                                                 data: {
                                                     _token: '{{ csrf_token() }}',
+
+
+                                                    descripcion: descripcion,
+                                                    presup_con: presup_con,
+                                                    unid_fisicas_planif: unid_fisicas_planif,
+                                                    num_benef_planif: num_benef_planif,
+                                                    fecha_seguimiento: fecha_seguimiento,
+                                                    id_meta: id_meta,
+                                                    unid_fisicas_real: unid_fisicas_real,
+                                                    num_beneficiarios_real: num_beneficiarios_real,
+                                                    presup_real: presup_real,
+                                                    fecha_real: fecha_real
+
 
                                                 },
 
                                                 success: function (data) {
-                                                    //                                              nombmeta=data.meta.desc_unid_fisicas;
-                                                    //                                              nombprog=data.prog.nomb_prog;
+                                                    //location.reload();
+                                                    //se inserto correctamente el seguimiento
 
-                                                    //  $('#seg').val('Els ')
+                                                    tabla.append(
+                                                        '<tr>' +
+                                                        ' <td> ' + descripcion + '</td>' +
+                                                        ' <td> ' + presup_con + '</td>' +  //este es preuspuesto que se planifica a pincipio de ano para este detalle de la acividad
+                                                        ' <td> ' + 1 + '</td>' +
+                                                        ' <td> ' + unid_fisicas_planif + '</td>' +
+                                                        ' <td> ' + num_benef_planif + '</td>' +
+                                                        ' <td> ' + fecha_seguimiento + '</td>' + //fecha en que se planifica el detalle de la actividad
 
-                                                    ufp_metp = data.meta.unid_fisicas_plan;
-                                                    nbf_metp = data.meta.beneficiarios_plan;
+                                                        ' </tr>'
+                                                    );
 
-
-                                                    for (var k = 0; k < data.seg_met.length; k++) {
-
-
-                                                        ufp_metp = ufp_metp - parseInt(data.seg_met[k].unid_fisicas_planif);
-                                                        nbf_metp = nbf_metp - parseInt(data.seg_met[k].num_benef_planif);
-
-                                                        ///calcular el presupuesto consumudo por el total de los seguimientos
-                                                        presup_totalp = presup_totalp + parseInt(data.seg_met[k].presup_con);
-
-                                                        //aqui cojo la fecha del ultimo seguimiento
-
-                                                    }
-
-
-                                                    presup_totalp = parseInt(data.meta.presupuesto) - presup_totalp;
-
-
-                                                    $('#pcon').attr('max', presup_totalp);
-                                                    $('#pcon').val(presup_totalp);
-
-                                                    $('#ufp').attr('max', ufp_metp);
-                                                    $('#ufp').val(ufp_metp);
-                                                    $('#nbp').attr('max', nbf_metp);
-                                                    $('#nbp').val();
+                                                    
 
                                                    
-                                                    // $('h5').val('seguimos en com');
 
 
-                                                }, error: function () {
-                                                    alert('Error en el seguimiento a esta meta')
+                                                   var presup_control_aux = parseInt(presup_control) - parseInt($('#pcon').val());
+                                                   presup_control=presup_control_aux; 
+
+                                                    ufp_metpp--;
+
+                                                    
+
+                                                    
+
+                                                    var nbf_metpp_aux = parseInt(nbf_metpp) - parseInt($('#nbp').val());
+                                                    nbf_metpp=nbf_metpp_aux;
+
+
+                                                   $('#elim').remove();   
+/*
+                                               $('#pcon').attr('max', presup_control);
+                                                $('#pcon').val(presup_control);
+                                                $('#ufp').attr('max', ufp_metpp);
+                                                $('#ufp').val(ufp_metpp);
+                                                $('#nbp').attr('max', nbf_metpp);
+                                                $('#nbp').val(nbf_metpp)*/
+
+                                               
+                                                                
+                                                if(parseInt(ufp_metpp) > 0 && parseInt(nbf_metpp_aux) > 0 ){
+                                                  tabla.append(
+                                                            '<tr id="elim" name="elim" >' +
+                                                            ' <td class="col-sm-4" > ' + '<textarea id="descrip" rows="1" class="form-control"> </textarea>' + '</td>' +
+                                                            ' <td class="col-sm-2" > ' + ' <input type="number" id="pcon"  min="0" value="'+presup_control_aux+'"  class="form-control " required>' + '</td>' +
+                                                            ' <td class="col-sm-2" > ' + ' <input type="number" id="ufp_fijo"  readonly min="0" value="' + 1 + '"  max="' + ufp_metpp + '" class="form-control " required>' + '</td>' +
+                                                            ' <td class="col-sm-2" > ' + ' <input type="number" id="ufp"  min="0" readonly value="' + ufp_metpp + '"  max="' + ufp_metpp + '" class="form-control " required>' + '</td>' +
+                                                            ' <td class="col-sm-2" > ' + ' <input type="number" id="nbp"  min="0"   value="' + nbf_metpp_aux + '" max="' + nbf_metpp_aux + '"  class="form-control " required>' + '</td>' +
+                                                            ' <td  > ' + ' <input type="date" id="fechaseg" min="0"  class="form-control "   required>' + '</td>' +
+                                                            
+            
+                                                            ' </tr>'
+                                                        );
+                                                }
+                                                else{
+
+                                                    if(parseInt(ufp_metpp)  <=0){
+                                                                tabla.append(
+                            
+                                                                    '<tr>'+
+                                                                        '<td colspan=6>'+
+                                                                        ' <div class="alert alert-danger" id="alerta"  role="alert">'+
+                                                                            ' No puede agregar más seguimientos, las unidades fisicas planificadas no pueden ser cero.'+
+                                                                        ' </div>'+
+                            
+                                                                        '</td>'+
+                                                                        
+                                                                    '</tr>'
+                                                                )
+                                                        }
+                                                        else{
+                            
+                                                            tabla.append(
+                            
+                                                                '<tr>'+
+                                                                    '<td colspan=6>'+
+                                                                    ' <div class="alert alert-danger" id="alerta"  role="alert">'+
+                                                                        ' No puede agregar más seguimientos, el número  de beneficiarios planificados no pueden ser cero.'+
+                                                                    ' </div>'+
+                            
+                                                                    '</td>'+
+                                                                    
+                                                                '</tr>'
+                                                                )
+                                                        }
+                                                }    
+
+                                                        
+            
+                                                        $('#alerta').fadeIn(1000);
+                                                        $('#alerta').fadeOut(5000);
+                                                                                          
+                                                
+
+
+                                                    ///////////////////////////////////////////
+                                                    // tablaDT.destroy();
+
+
+                                                   
+
+                                                    /// tablaDT = tabla.DataTable();
+
+                                                    
+                                                }, error: function (e) {
+                                                    alert('Error al insertar el seguimiento');
+                                                    //location.reload();
                                                 }
                                             });
 
 
-                                            ///////////////////////////////////////////
-                                            // tablaDT.destroy();
-
-
-                                            $('#elim').remove();
-
-                                            /// tablaDT = tabla.DataTable();
-
-
-                                            tabla.append(
-                                                '<tr id="elim" name="elim" >' +
-                                                ' <td class="col-sm-4" > ' + '<textarea id="descrip" rows="1" class="form-control"> </textarea>' + '</td>' +
-                                                ' <td class="col-sm-2" > ' + ' <input type="number" id="pcon"  min="0" value="0"  class="form-control " required>' + '</td>' +
-                                                ' <td class="col-sm-2" > ' + ' <input type="number" id="ufp_fijo"  readonly min="0" value="' + 1 + '"  max="' + ufp_metp + '" class="form-control " required>' + '</td>' +
-                                                ' <td class="col-sm-2" > ' + ' <input type="number" id="ufp"  min="0" readonly value="' + ufp_metp + '"  max="' + ufp_metp + '" class="form-control " required>' + '</td>' +
-                                                ' <td class="col-sm-2" > ' + ' <input type="number" id="nbp"  min="0"   value="' + nbf_metp + '" max="' + nbf_metp + '"  class="form-control " required>' + '</td>' +
-                                                ' <td  > ' + ' <input type="date" id="fechaseg" min="0"  class="form-control "   required>' + '</td>' +
                                               
+                                           
 
-                                                ' </tr>'
-                                            )
+                                          
 
-                                            $('#alerta').fadeIn(1000);
-                                            $('#alerta').fadeOut(5000);
 
-                                            //
-
-                                        }, error: function (e) {
-                                            alert('Error al insertar el seguimiento');
-                                            //location.reload();
-                                        }
-                                    });
 
                                 }
                             }
@@ -672,7 +743,7 @@
                             }
                         }
                         else {
-                            alert('La fecha del seguimiento desea insertar es menor que la fecha del ultimo seguimiento o el número de beneficiarios que desea insertar es menor o igual cero ');
+                            alert('La fecha del seguimiento que desea insertar es menor que la fecha del último seguimiento insertado o revise el  número de beneficiarios planificados y el número de unidades fisicas planificadas que no pueden ser  menor o igual cero ');
                             // location.reload();
                         }
                     }
@@ -705,17 +776,20 @@
                           if(parseInt(unid_fisicas_planif) >= parseInt(unid_fisicas_real) && parseInt(presup_con)>= parseInt(presup_real) ) { /*&& parseInt(num_benef_planif)>= parseInt(num_beneficiarios_real)*/  /*&&  && Date.parse(fecha_seguimiento)>=Date.parse(fecha_real)*/
 
                               bandera='Verdadero';
-//                              alert(num_benef_planif)
-//                              alert(num_beneficiarios_real)
+
+
                           }
                           else
                           {
                               bandera='Falso'
                               i=mi_matriz.length;
+                             
 
                           }
 
                       }
+                      
+
 
 
                   if(bandera=='Verdadero'){
@@ -732,8 +806,8 @@
                           var presup_real = $('#presup_real_'+ mi_matriz[i]).val();
 
                           var id_meta = idmeta;
-
-               // alert('hola')
+                         
+               
                             $.ajax({
                                 type: 'POST',
 
@@ -764,6 +838,37 @@
                         }
                                              $('#modalMemb1').modal('hide');   
 
+
+                             //buscando la disponibilidad planificada en la actividad que no fue tenida en cuenta en la planificaion de los seguimientos
+                             $.ajax({
+                                type: 'GET',
+
+                                url: '/buscar/Disp/Planif/'+ idmeta,
+                                data: {
+                                    _token: '{{ csrf_token() }}',
+                                  
+                                },
+
+                                success: function (data) {
+
+                                        if(data.meta.id && data.programa.id)
+
+                                            $('#alerta2').text("Usted no utilizó $"+ data.dif_prsup_planif + " del presupuesto planificado, el cual será devuelto al programa "+data.programa.nomb_prog );
+
+                                            $('#alerta2').fadeIn(1000);
+
+                                    
+                        
+
+                    
+                                }, error: function (e) {
+                                    alert('Error buscando datos sobre presupuesto planificado no utilizado');
+                                    //location.reload();
+                                }
+                            });
+
+    
+
                       }
                       else
                       {
@@ -771,6 +876,10 @@
                       }
 
 
+                 
+                 
+                 
+                 
                   $('#modalMemb1').modal('hide')
 
                   $('tr[name=fila]').remove();

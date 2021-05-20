@@ -183,7 +183,7 @@ class MetaController extends Controller
         $presup_con = $seg->presup_con;
         $presup_real = $request->input('presup_real');
 
-        if($seg->estado!='V' && $presup_real != 0) {
+        if($seg->estado!='V' && $presup_real >= 0) {
 
 
             //devolviendo el presupuesto si el prresupuesto real es menor que el planificado
@@ -225,10 +225,66 @@ class MetaController extends Controller
 
 //actualizar presupuesto
 
+        
+       $seg->save();
 
-        $seg->save();
+       
+    }
+    /*
+    Este un metodo que ajusta el presupuesto en caso de que el presup planificado  de la 
+    * actividad sea menor al presupuesto planificado de los seguimientos , la diferencia se ajusta 
+    * quitandosela al presupuesto de la activida y sumandosela a el presupuesto del programa donde
+    */
+     
+    public function buscarPresupPlanif($id_meta){
+
+        $met=Metas::find($id_meta);//busco la meta
+        $programa = Programa::find($met->id_programa);
+        
+
+
+        //unidades fisicas reales hasta el momento
+        $sum_uunid_fisicas_real=$met->GetSeguimientos->sum('unid_fisicas_real');
+
+        //unidades fisicas planificadas hasa el momento en al actvidad
+        $sum_unid_fisicas_planif=$met->unid_fisicas_plan;
+        
+        if($sum_unid_fisicas_planif <= $sum_uunid_fisicas_real ){
+            //entonces la actividad cerro lo que quiere decir que se verifica el presupuesto planificado de los seguiemientos y el de la actividad
+            $sum_presup_seg=$met->GetSeguimientos->sum('presup_con');//presupuesto planificado
+            
+            if($met->presupuesto >  $sum_presup_seg ){
+
+               
+                $dif_prsup_planif=$met->presupuesto - $sum_presup_seg ;
+
+               // dd($dif_prsup_planif);
+
+                $met->presupuesto=$sum_presup_seg;
+
+                $met->save();
+
+
+               
+
+               // $programa->presupuesto_prog = $programa->presupuesto_prog + $dif_prsup_planif;
+
+                //$programa->save();
+                return response()->json(['meta'=>$met,'programa'=>$programa,'dif_prsup_planif'=>$dif_prsup_planif]);
+
+            }
+
+           
+
+
+
+
+        }
+
+        return response()->json([]);
 
 
     }
+
 
 }

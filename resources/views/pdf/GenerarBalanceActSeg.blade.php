@@ -156,7 +156,7 @@
 
                 <div class="panel panel-default ">
                     <div class="panel-heading">
-                        <h1 class="panel-title">Balance social cooperativo por seguimientos de actividades perteneciente al año {{$ano->ano}} " {{$nomb_coop->nombre}}"</h1>
+                        <h1 class="panel-title">Balance social cooperativo por  actividades perteneciente al año {{$ano->ano}} " {{$nomb_coop->nombre}}"</h1>
                     </div>
 
 
@@ -278,7 +278,7 @@
                                             @endforeach
                                             <tr>
                                                       
-                                                      <FONT color="WHITE"> <td colspan="2" style="background-color:black"> Totales</td></FONT>
+                                                             <td colspan="2" style="background-color:gray"><FONT color="WHITE"> Totales</FONT></td>
                                                              {{-- <td>{{$seguimiento->descripcion}}</td>--}}
                                                               <td>{{$met->GetSeguimientos->sum('presup_con')}}</td>
                                                               {{--  <td>{{$met->manif_num}}</td>--}}

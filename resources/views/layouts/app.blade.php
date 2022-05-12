@@ -89,12 +89,14 @@ Header Section
 
                         </ul>
                     </li>
-                    <li class="menu-has-children"><a href="#">Balances</a>
+                    <li class="menu-has-children"><a href="#">Balances Social Cooperativo</a>
                         <ul>
 
-                            <li><a href="/federacion/balances">Balance social cooperativo</a></li>
-                            <li><a href="/federacion/balances/ind">Balance social cooperativo con variables</a></li>
+                            <li><a href="/federacion/balances">Programa sociales</a></li>
+                            <li><a href="/federacion/balances/ind">Actividades sociales</a></li>
                             <li><a href="/federacion/balances/coop/total">Balance social por cooperativa</a></li>
+
+                            
 
                         </ul>
                     </li>
@@ -144,12 +146,14 @@ Header Section
 
                         </ul>
                     </li>
-                    <li class="menu-has-children"><a href="#">Balance social cooperativo</a>
+                    <li class="menu-has-children"><a href="#">Balance Social Cooperativo</a>
                         <ul>
                             <li><a href="/balance/prog">Progamas sociales</a></li>
                             <li><a href="/balance/seg/act">Actividades sociales </a></li>
                             <li><a href="/balance/prog/ind">Reporte social</a></li>
                            {{-- <li><a href="/balance/act/prog">Actividades Sociales </a></li>--}}
+
+                           
                             
                         </ul>
                     </li>
@@ -191,11 +195,15 @@ Header Section
 
                         </ul>
                     </li>
-                    <li class="menu-has-children"><a href="#">Balances</a>
+                    <li class="menu-has-children"><a href="#">Balance Social Cooperativo</a>
                         <ul>
 
-                            <li><a href="/federacion/balances">Balance social cooperativo</a></li>
-                            <li><a href="/federacion/balances/ind">Balance social cooperativo con variables</a></li>
+                            <li><a href="/federacion/balances">Programa sociales</a></li>
+                            <li><a href="/federacion/balances/ind">Actividades sociales</a></li>
+
+                            
+
+                            
 
                         </ul>
                     </li>

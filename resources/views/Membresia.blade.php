@@ -445,7 +445,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row ">
-                                    <label for="uf" class="col-sm-4 col-form-label">Postgrado</label>
+                                    <label for="uf" class="col-sm-4 col-form-label">Posgrado</label>
                                     <div class="col-sm-5">
                                         <input type="number" id="postgrado1" min="0" name="postgrado1" class="form-control" required >
                                         <div class="form-control-feedback text-danger" id="postgrado1t"></div>
